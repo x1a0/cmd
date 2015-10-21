@@ -1,0 +1,45 @@
+.shellWrapper {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  color: #ddd;
+  font-family: 'Inconsolata', Monaco, Menlo, Consolas, "Courier New", monospace;
+  overflow: auto;
+
+  .shell {
+    padding: 0 10px;
+    height: 100%;
+    font-size: 13px;
+
+    .output {
+      padding-top: 20px;
+
+      .line {
+      }
+    }
+
+    .prompt {
+      position: relative;
+      padding: 10px 0;
+
+      .prefix {
+        position: absolute;
+        left: 0;
+        width: 20px;
+        font-weight: 700;
+      }
+
+      input {
+        padding-left: 20px;
+        width: 100%;
+        border: none;
+        background-color: inherit;
+        outline: none;
+        color: #fff;
+        font-family: inherit;
+        font-size: inherit;
+        box-sizing: border-box;
+      }
+    }
+  }
+}
