@@ -1,3 +1,4 @@
+import chokidar from 'chokidar';
 import compression from 'compression';
 import Express from 'express';
 import favicon from 'serve-favicon';
@@ -10,7 +11,7 @@ export default function startServerWith({webpackConfig}) {
 
   const server = new Express();
   server.use(compression());
-  server.use(favicon(path.join(__dirname, 'assets', 'favicon.ico')));
+  server.use(favicon(path.join(__dirname, 'favicon.ico')));
 
   if (__DEVELOPMENT__) {
     const compiler = webpack(webpackConfig);
@@ -33,13 +34,22 @@ export default function startServerWith({webpackConfig}) {
       next();
     });
 
-    compiler.plugin('done', function() {
+    const clearModuleCache = () => {
       console.log("Clearing module cache from server except for /node_modules/");
       Object.keys(require.cache).forEach(function(id) {
         if (!/\/node_modules\//.test(id)) {
           delete require.cache[id];
         }
       });
+    };
+
+    compiler.plugin('done', () => clearModuleCache());
+
+    const watcher = chokidar.watch([
+      '.'
+    ]);
+    watcher.on('ready', () => {
+      watcher.on('all', () => clearModuleCache());
     });
 
   } else {
@@ -50,8 +60,9 @@ export default function startServerWith({webpackConfig}) {
   }
 
   server.use((req, res, next) => {
-    require('./client/server-render')(req.path, function(err, htmlString) {
+    require('./render')(req.path, function(err, redirectTo, htmlString) {
       if (err) return next(err);
+      if (redirectTo) return res.redirect(redirectTo);
       res.send(htmlString);
     });
   });

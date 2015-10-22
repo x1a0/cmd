@@ -1,15 +1,16 @@
 export const RUN_CMD = 'RUN_CMD';
-export const LOAD_INIT_OUTPUT = 'LOAD_INIT_OUTPUT';
+export const PRINT = 'PRINT';
 
 export function runCmd(cmd) {
   return {
     type: RUN_CMD,
     cmd: cmd
   };
-}
+};
 
-export function loadInitOutput() {
+export function print(data) {
   return {
-    type: LOAD_INIT_OUTPUT
+    type: PRINT,
+    data: data
   };
-}
+};

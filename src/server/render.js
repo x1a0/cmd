@@ -14,14 +14,15 @@ function renderApp(path, done) {
 
   store.dispatch(match(path, (err, redirectLocation, routerState) => {
     if (err) {
-      done(err);
+      return done(err);
     }
 
     if (redirectLocation) {
-      // handle redirect
+      return done(null, redirectLocation.pathname);
     }
 
     if (!routerState) {
+      console.warn('404');
       // handle 404
     }
 
@@ -39,7 +40,7 @@ function renderApp(path, done) {
         store={store}
       />);
 
-      done(null, '<!DOCTYPE html>\n' + ReactDOM.renderToString(html));
+      done(null, null, '<!DOCTYPE html>\n' + ReactDOM.renderToString(html));
     });
   }));
 };

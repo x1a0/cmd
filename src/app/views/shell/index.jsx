@@ -4,23 +4,7 @@ import styles from './styles.scss';
 import { Component } from 'react';
 import { connect } from 'react-redux';
 
-import {
-  runCmd,
-  loadInitOutput
-} from '../../actions';
-
 class Shell extends Component {
-  constructor(props) {
-    super(props);
-    this.init = false;
-  }
-
-  static fetchData(getState, dispatch, location, params) {
-    return new Promise((resolve) => {
-      dispatch(loadInitOutput());
-      resolve()
-    });
-  }
 
   render() {
     const { output } = this.props;
@@ -44,14 +28,9 @@ class Shell extends Component {
   }
 }
 
-function mapStateToProps(state) {
+export default connect(state => {
   const { output } = state;
   return {
     output
   };
-}
-
-export default connect(mapStateToProps, {
-  runCmd,
-  loadInitOutput
 })(Shell);

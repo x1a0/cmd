@@ -1,8 +1,9 @@
 import createLogger from 'redux-logger';
-import routes from '../app/routes';
 import transitionMiddleware from './middlewares/transition';
 import { createStore as _createStore, applyMiddleware, compose } from 'redux';
 import { devTools } from 'redux-devtools';
+
+import routes from '../app/routes';
 
 export default function createStore(reduxReactRouter, createHistory, initState) {
   const middlewares = [transitionMiddleware];
