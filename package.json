@@ -6,7 +6,7 @@
   "scripts": {
     "build": "./node_modules/.bin/webpack --config ./webpack/prod.config.js",
     "dev": "node ./bin/server",
-    "server": "npm run build && NODE_ENV=production node ./bin/server",
+    "start": "npm run build && NODE_ENV=production node ./bin/server",
     "postinstall": "npm run build"
   },
   "author": "x1a0",
