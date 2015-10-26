@@ -1,0 +1,23 @@
+.prompt {
+  position: relative;
+  padding: 10px 0;
+
+  .prefix {
+    position: absolute;
+    left: 0;
+    width: 20px;
+    font-weight: 700;
+  }
+
+  input {
+    padding-left: 20px;
+    width: 100%;
+    border: none;
+    background-color: inherit;
+    outline: none;
+    color: #fff;
+    font-family: inherit;
+    font-size: inherit;
+    box-sizing: border-box;
+  }
+}

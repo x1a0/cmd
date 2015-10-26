@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import {
-  print
-} from '../actions';
+import Output from '../components/output';
+import Prompt from '../components/prompt';
+import { print, runCmd } from '../actions';
 
 const asciiHelloCmd =`
  _____     _ _                      _
@@ -21,10 +21,21 @@ class Home extends React.Component {
     });
   }
 
-  render() { return null; }
+  render() {
+    return (
+      <div>
+        <Output />
+        <Prompt run={this.run} />
+      </div>
+    );
+  }
+
+  run = (input) => {
+    this.props.runCmd(input);
+  }
 }
 
 export default connect(state => ({}), {
-  print
+  runCmd
 })(Home);
 

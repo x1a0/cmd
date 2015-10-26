@@ -1,9 +1,8 @@
 import React from 'react';
-import { Component } from 'react';
 
 import styles from './styles.scss';
 
-export default class Prompt extends Component {
+export default class Prompt extends React.Component {
 
   static propTypes = {
     run: React.PropTypes.func.isRequired
