@@ -1,7 +1,7 @@
 import createLogger from 'redux-logger';
 import transitionMiddleware from './middlewares/transition';
 import { createStore as _createStore, applyMiddleware, compose } from 'redux';
-import { devTools } from 'redux-devtools';
+import { devTools, persistState } from 'redux-devtools';
 
 import routes from '../app/routes';
 
@@ -13,10 +13,16 @@ export default function createStore(reduxReactRouter, createHistory, initState) 
 
   if (__DEVELOPMENT__ && __CLIENT__) {
     middlewares.push(createLogger());
-    stores.push(devTools());
   }
 
   stores.push(applyMiddleware(...middlewares))
+
+  if (__DEVELOPMENT__) {
+    stores.push(devTools());
+    if (__CLIENT__) {
+      stores.push(persistState(window.location.href.match(/[?&]debug_session=([^&]+)\b/)));
+    }
+  }
 
   const finalCreateStore = compose(...stores)(_createStore);
   const reducer = require('../app/reducers');

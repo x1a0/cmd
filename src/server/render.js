@@ -7,7 +7,7 @@ import { reduxReactRouter } from 'redux-router/server';
 import { ReduxRouter } from 'redux-router';
 
 import createStore from '../redux/create';
-var Html = require('../app/html');
+import Html from '../app/Html';
 
 function renderApp(path, done) {
   const store = createStore(reduxReactRouter, createHistory);

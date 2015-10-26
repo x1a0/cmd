@@ -40,6 +40,10 @@ export default class Html extends Component {
         </head>
         <body>
           <div id="root" dangerouslySetInnerHTML={{__html: content}}/>
+          {(() => {
+            if (__DEVELOPMENT__) return <div id="debug"/>;
+            else return null;
+          })()}
           <script dangerouslySetInnerHTML={{__html: `window.__data=${serialize(store.getState())};`}} />
           <script src={assets.javascript.main}/>
         </body>

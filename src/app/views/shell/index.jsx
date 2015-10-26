@@ -3,6 +3,7 @@ import React from 'react';
 import styles from './styles.scss';
 import { Component } from 'react';
 import { connect } from 'react-redux';
+import { runCmd } from '../../actions';
 
 class Shell extends Component {
 
@@ -28,9 +29,12 @@ class Shell extends Component {
   }
 }
 
-export default connect(state => {
-  const { output } = state;
-  return {
-    output
-  };
-})(Shell);
+export default connect(
+  state => {
+    const { output } = state;
+    return {
+      output
+    };
+  },
+  { runCmd }
+)(Shell);
