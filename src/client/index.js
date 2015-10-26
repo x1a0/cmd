@@ -17,9 +17,11 @@ ReactDOM.render(
 );
 
 if (__DEVELOPMENT__) {
-  const Debug = require('./Debug');
+  const DevTools = require('./DevTools');
   ReactDOM.render(
-    <Debug store={store}/>,
+    <Provider store={store}>
+      <DevTools />
+    </Provider>,
     document.getElementById('debug')
   );
 }
