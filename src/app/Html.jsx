@@ -16,7 +16,7 @@ export default class Html extends Component {
   static propTypes = {
     assets: PropTypes.object,
     component: PropTypes.node,
-    store: PropTypes.object
+    store: PropTypes.object,
   }
 
   render() {
@@ -42,7 +42,7 @@ export default class Html extends Component {
           <div id="root" dangerouslySetInnerHTML={{__html: content}}/>
           {(() => {
             if (__DEVELOPMENT__) return <div id="debug"/>;
-            else return null;
+            return null;
           })()}
           <script dangerouslySetInnerHTML={{__html: `window.__data=${serialize(store.getState())};`}} />
           <script src={assets.javascript.main}/>
