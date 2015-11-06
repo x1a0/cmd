@@ -1,3 +1,5 @@
+const debug = require('debug')('cmd:redux:middleware:promise');
+
 export default function promiseMiddleware() {
   return next => action => {
     const { promise, type, ...rest } = action;
@@ -10,7 +12,7 @@ export default function promiseMiddleware() {
 
     next({
       type: REQUEST,
-      ...rest
+      ...rest,
     });
 
     return promise
@@ -19,9 +21,9 @@ export default function promiseMiddleware() {
         return true;
       })
       .catch(err => {
-        console.log(err);
+        debug(err);
         next({err, type: FAILURE, ...rest});
         return false;
       });
   };
-};
+}

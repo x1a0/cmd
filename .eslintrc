@@ -1,0 +1,14 @@
+{
+  "extends": "airbnb",
+  "globals": {
+    "webpackIsomorphicTools": false,
+    "__DEVELOPMENT__": false,
+    "__PRODUCTION__": false,
+    "__SERVER__": false,
+    "__CLIENT__": false
+  },
+  "rules": {
+    // indent case-statements within a switch
+    "indent": [2, 2, {"SwitchCase": 1}]
+  }
+}

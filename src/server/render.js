@@ -9,6 +9,8 @@ import { ReduxRouter } from 'redux-router';
 import createStore from '../redux/create';
 import Html from '../app/Html';
 
+const debug = require('debug')('cmd:server:render');
+
 function renderApp(path, done) {
   const store = createStore(reduxReactRouter, createHistory);
 
@@ -22,7 +24,7 @@ function renderApp(path, done) {
     }
 
     if (!routerState) {
-      console.warn('404');
+      debug('404');
       // handle 404
     }
 
@@ -35,7 +37,7 @@ function renderApp(path, done) {
       );
 
       const html = (<Html
-        assets={webpackIsomorphicToos.assets()}
+        assets={webpackIsomorphicTools.assets()}
         component={component}
         store={store}
       />);
@@ -43,6 +45,6 @@ function renderApp(path, done) {
       done(null, null, '<!DOCTYPE html>\n' + ReactDOM.renderToString(html));
     });
   }));
-};
+}
 
 module.exports = renderApp;

@@ -4,7 +4,7 @@ import { routerStateReducer as router } from 'redux-router';
 import * as Actions from '../actions';
 
 function output(state = [], action) {
-  const { type, cmd }  = action;
+  const { type, cmd } = action;
 
   switch (type) {
     case Actions.RUN_CMD:
@@ -21,5 +21,5 @@ function output(state = [], action) {
 
 export default combineReducers({
   output,
-  router
+  router,
 });

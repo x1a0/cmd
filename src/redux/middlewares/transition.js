@@ -1,9 +1,7 @@
 import { ROUTER_DID_CHANGE } from 'redux-router/lib/constants';
 
-const locationsAreEqual = (a, b) => {
-  if (a.pathname !== b.pathname) return false;
-  if (a.search !== b.search) return false;
-  return true;
+const locationsAreEqual = (locA, locB) => {
+  return locA.pathname === locB.pathname && locA.search === locB.search;
 };
 
 const loadComponentsData = (components, getState, dispatch, location, params) => {
@@ -20,11 +18,13 @@ const loadComponentsData = (components, getState, dispatch, location, params) =>
 };
 
 export default ({getState, dispatch}) => next => action => {
-  if (action.type !== ROUTER_DID_CHANGE)
+  if (action.type !== ROUTER_DID_CHANGE) {
     return next(action);
+  }
 
-  if (getState().router && locationsAreEqual(action.payload.location, getState().router.location))
+  if (getState().router && locationsAreEqual(action.payload.location, getState().router.location)) {
     return next(action);
+  }
 
   const {components, location, params} = action.payload;
   const promise = new Promise((resolve) => {

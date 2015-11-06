@@ -1,11 +1,14 @@
-import React from 'react';
+import React, {
+  Component,
+  PropTypes,
+} from 'react';
 
 import styles from './styles.scss';
 
-export default class Prompt extends React.Component {
+export default class Prompt extends Component {
 
   static propTypes = {
-    run: React.PropTypes.func.isRequired
+    run: PropTypes.func.isRequired,
   }
 
   onKeyPress = (event) => {
@@ -19,7 +22,7 @@ export default class Prompt extends React.Component {
     return (
       <div className={styles.prompt}>
         <div className={styles.prefix}>></div>
-        <input ref="input" type="text" autoFocus={true} onKeyPress={this.onKeyPress} />
+        <input ref="input" type="text" autoFocus onKeyPress={this.onKeyPress} />
       </div>
     );
   }

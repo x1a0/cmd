@@ -25,7 +25,7 @@ global.__CLIENT__ = false;
 
 var webpackConfig = __PRODUCTION__ ? require('../webpack/prod.config') : require('../webpack/dev.config');
 
-global.webpackIsomorphicToos = new WebpackIsomorphicTools(require('../webpack/isomorphic-tools-config'))
+global.webpackIsomorphicTools = new WebpackIsomorphicTools(require('../webpack/isomorphic-tools-config'))
   .development(__DEVELOPMENT__)
   .server(webpackConfig.context, function() {
     require('../src/server')({

@@ -1,12 +1,19 @@
-import React from 'react';
+import React, {
+  Component,
+  PropTypes,
+} from 'react';
 import { connect } from 'react-redux';
 
 import styles from './styles.scss';
 
-class Output extends React.Component {
-
+@connect(
+  (state) => ({
+    lines: state.output,
+  })
+)
+class Output extends Component {
   static propTypes = {
-    lines: React.PropTypes.arrayOf(React.PropTypes.string).isRequired
+    lines: PropTypes.arrayOf(React.PropTypes.string).isRequired,
   }
 
   render() {
@@ -14,20 +21,12 @@ class Output extends React.Component {
 
     return (
       <div className={styles.output}>
-        {lines.map(function(line, i) {
-          return <pre className={styles.line} key={i}>{line}</pre>;
+        {lines.map((line, nu) => {
+          return <pre className={styles.line} key={nu}>{line}</pre>;
         })}
       </div>
     );
   }
 }
 
-const state2Props = (state) => {
-  return {
-    lines: state.output
-  };
-};
-
-export default connect(
-  state2Props
-)(Output);
+export default Output;

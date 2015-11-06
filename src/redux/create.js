@@ -1,7 +1,7 @@
 import createLogger from 'redux-logger';
 import transitionMiddleware from './middlewares/transition';
 import { createStore as _createStore, applyMiddleware, compose } from 'redux';
-import { instrument, persistState } from 'redux-devtools';
+import { persistState } from 'redux-devtools';
 
 import routes from '../app/routes';
 
@@ -15,7 +15,7 @@ export default function createStore(reduxReactRouter, createHistory, initState) 
     middlewares.push(createLogger());
   }
 
-  stores.push(applyMiddleware(...middlewares))
+  stores.push(applyMiddleware(...middlewares));
 
   if (__DEVELOPMENT__) {
     if (__CLIENT__) {
@@ -36,4 +36,4 @@ export default function createStore(reduxReactRouter, createHistory, initState) 
   }
 
   return store;
-};
+}
